@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_usuario'); // Cambiado a unsignedBigInteger para usarlo como clave foránea
+            $table->unsignedBigInteger('id_libro'); // Cambiado a unsignedBigInteger para usarlo como clave foránea
+            $table->datetime('fecha_reserva');
+            $table->string('estado');
             $table->timestamps();
+
+            // Definir claves foráneas
+            $table->foreign('id_usuario')->references('id')->on('users');
+            $table->foreign('id_libro')->references('id')->on('libros');
         });
     }
 

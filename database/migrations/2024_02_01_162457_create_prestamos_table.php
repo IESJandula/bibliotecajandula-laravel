@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_libro');
+            $table->datetime('fecha_prestamo');
+            $table->string('estado');
+            $table->boolean('devuelto');
             $table->timestamps();
+
+            // Definir claves foráneas
+            $table->foreign('id_usuario')->references('id')->on('users');
+            $table->foreign('id_libro')->references('id')->on('libros');
         });
     }
 
