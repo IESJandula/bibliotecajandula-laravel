@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 /* Home */
 Route::get('/', function () {
-    return view('index')->name('index');
+    return view('index');
 });
 
 /* Login y logout */
@@ -24,6 +24,21 @@ Route::get('/', function () {
 
 /* libros */
 
+
+
+/* multas */
+
+
+/* prestamos */
+
+
+/* reservas */
+
+
+/* transacciones */
+
+
+/* users */
 
 
 
