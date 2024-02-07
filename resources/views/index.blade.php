@@ -1,2 +1,4 @@
 @extends('master')
-<h1>Libro</h1>
+@section('content')
+    <h1>Hola</h1>
+@endsection

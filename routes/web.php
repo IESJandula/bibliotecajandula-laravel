@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LibroController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +25,11 @@ Route::get('/', function () {
 
 
 /* libros */
-
+Route::get('/libros/create', [LibroController::class, 'create'])->name('createLibro');
 
 
 /* multas */
-
+Route::get('/multas/create', [LibroController::class, 'create'])->name('createLibro');
 
 /* prestamos */
 
