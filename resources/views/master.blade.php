@@ -13,7 +13,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Biblioteca</title>
 
     <meta name="description" content="" />
 
@@ -597,14 +597,21 @@
         </aside>
         <!-- / Menu -->
 
-        
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <h1>eee</h1>
+          
+            </div>
             <!-- / Content -->
-
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
+          <div class="">
+
+          </div>
         </div>
         <!-- / Layout page -->
       </div>
