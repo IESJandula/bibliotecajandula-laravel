@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\MultaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,16 +28,20 @@ Route::get('/', function () {
 
 /* libros */
 Route::get('/libros/create', [LibroController::class, 'create'])->name('createLibro');
+Route::get('/libros/shows', [LibroController::class, 'index'])->name('show_libros');
+Route::get('/libros/show', [LibroController::class, 'show'])->name('show_libro');
+Route::post('/libros/createPost', [LibroController::class, 'store'])->name('createLibroPost');
+
 
 
 /* multas */
-Route::get('/multas/create', [LibroController::class, 'create'])->name('createLibro');
+Route::get('/multas/create', [MultaController::class, 'create'])->name('createMulta');
 
 /* prestamos */
 
 
 /* reservas */
-
+Route::get('/reservas/create', [ReservaController::class, 'create'])->name('createReserva');
 
 /* transacciones */
 

@@ -12,7 +12,7 @@ class Libro extends Model
     // Atributos de la tabla
     protected $fillable = [
         'titulo', 'isbn', 'anyo_publicacion', 'editorial','genero',
-        'num_paginas','cant_total','cant_disponible','estanteria'
+        'num_paginas','cant_total','cant_disponible','estanteria', 'poster'
     ];
     use HasFactory;
 /* 

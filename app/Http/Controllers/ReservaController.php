@@ -19,7 +19,7 @@ class ReservaController extends Controller
      */
     public function create()
     {
-        //
+        return view('reservas.create_reserva');
     }
 
     /**

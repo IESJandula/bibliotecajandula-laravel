@@ -28,7 +28,15 @@ class MultaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'motivo' => 'required|string',
+            'cantidad' => 'required|numeric',
+            'estado' => 'required',
+            'id_prestamo' => 'required|numeric'
+        ]);
+
+        //Multa::create($request->all());
+        //return redirect()->route();
     }
 
     /**
