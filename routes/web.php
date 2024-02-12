@@ -28,9 +28,15 @@ Route::get('/', function () {
 
 /* libros */
 Route::get('/libros/create', [LibroController::class, 'create'])->name('createLibro');
-Route::get('/libros/shows', [LibroController::class, 'index'])->name('show_libros');
-Route::get('/libros/show', [LibroController::class, 'show'])->name('show_libro');
+Route::get('/libros/show', [LibroController::class, 'index'])->name('show_libros');
+Route::get('/libros/show/{id}', [LibroController::class, 'show'])->name('show_libro');
 Route::post('/libros/createPost', [LibroController::class, 'store'])->name('createLibroPost');
+Route::get('/libros/edit/{id}', [LibroController::class, 'edit'])->name('libro_edit');
+Route::put('/libros/update/{id}', [LibroController::class, 'update'])->name('libro_update');
+Route::delete('/libros/delete/{id}', [CatalogController::class, 'destroy'])->name('libro_delete');
+
+
+
 
 
 

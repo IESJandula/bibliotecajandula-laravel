@@ -20,7 +20,7 @@ class MultaController extends Controller
      */
     public function create()
     {
-        return view('multas.create_multa');
+        
     }
 
     /**

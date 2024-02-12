@@ -9,7 +9,7 @@
               <small class="text-muted float-end">Actualizar libro</small>
             </div>
             <div class="card-body">
-              <form method="POST" action="{{ route('libros.update', $libro->id) }}">
+              <form method="POST" action="{{ route('libro_update', ['id' => $libro->id]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -83,6 +83,14 @@
                   {{-- Mostrar mensajes de error para el campo 'estanteria' --}}
                   @if($errors->has('estanteria'))
                     <span class="text-danger">{{ $errors->first('estanteria') }}</span>
+                  @endif
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="poster">Poster</label>
+                  <input type="file" class="form-control" name="poster" id="poster" placeholder="Poster" />
+                  {{-- Mostrar mensajes de error para el campo 'poster' --}}
+                  @if($errors->has('poster'))
+                    <span class="text-danger">{{ $errors->first('poster') }}</span>
                   @endif
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar</button>

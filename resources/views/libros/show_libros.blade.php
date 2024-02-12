@@ -1,35 +1,21 @@
 @extends('master')
+
 @section('content')
-    <!-- Basic Layout -->
-    <div class="row">
-        <div class="col-xl">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Lista de Libros</h5>
-                    <small class="text-muted float-end">Lista de Libros</small>
-                </div>
-                <div class="card-body">
-                    @if($libros->count() > 0)
-                        <ul class="list-group">
-                            @foreach($libros as $libro)
-                                <li class="list-group-item">
-                                    <strong>Título:</strong> {{ $libro->titulo }} <br>
-                                    <strong>ISBN:</strong> {{ $libro->isbn }} <br>
-                                    <strong>Año de publicación:</strong> {{ $libro->anyo_publicacion }} <br>
-                                    <strong>Editorial:</strong> {{ $libro->editorial }} <br>
-                                    <strong>Género:</strong> {{ $libro->genero }} <br>
-                                    <strong>Número de páginas:</strong> {{ $libro->num_paginas }} <br>
-                                    <strong>Cantidad total:</strong> {{ $libro->cant_total }} <br>
-                                    <strong>Cantidad disponible:</strong> {{ $libro->cant_disponible }} <br>
-                                    <strong>Estantería:</strong> {{ $libro->estanteria }} <br>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <p>No hay libros disponibles.</p>
-                    @endif
+    <h1 class="text-center mt-4">Listado de Libros</h1>
+    <div class="row mb-5">
+        @foreach($libros as $libro)
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card h-100" style="max-width: 70%;">
+                    <img class="card-img-top img-fluid" src="{{ asset('storage/images/' . $libro->poster) }}" alt="Card image cap" style="max-height: 15rem;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 1.2rem;">{{ $libro->titulo }}</h5>
+                        <p class="card-text" style="font-size: 0.9rem;">
+                            <!-- Add your book description here if available -->
+                        </p>
+                        <a href="{{ route('show_libro', ['id' => $libro['id']]) }}" class="btn btn-outline-primary btn-sm">Ver más</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @endsection

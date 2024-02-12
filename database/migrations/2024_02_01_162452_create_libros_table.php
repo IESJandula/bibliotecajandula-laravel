@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->string('isbn');
-            $table->year('anyo_publicacion');
+            $table->integer('anyo_publicacion');
             $table->string('editorial');
             $table->string('genero');
             $table->integer('num_paginas');
             $table->integer('cant_total');
             $table->integer('cant_disponible');
             $table->string('estanteria');
+            $table->string('poster');
             $table->timestamps();
         });
     }
