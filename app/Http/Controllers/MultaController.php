@@ -12,7 +12,9 @@ class MultaController extends Controller
      */
     public function index()
     {
-        //
+        $multas = Multa::all();
+
+        return view('multas/show_multas', ['multas' => $multas]);
     }
 
     /**
@@ -28,12 +30,12 @@ class MultaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        /*$request->validate([
             'motivo' => 'required|string',
             'cantidad' => 'required|numeric',
             'estado' => 'required',
             'id_prestamo' => 'required|numeric'
-        ]);
+        ]);*/
 
         //Multa::create($request->all());
         //return redirect()->route();

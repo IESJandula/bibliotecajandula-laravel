@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 
 class ReservaController extends Controller
@@ -11,7 +12,9 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        //
+        $reservas = Reserva::all();
+
+        return view('reservas/show_reservas', ['reservas' => $reservas]);
     }
 
     /**
@@ -19,7 +22,7 @@ class ReservaController extends Controller
      */
     public function create()
     {
-        return view('reservas.create_reserva');
+        //
     }
 
     /**

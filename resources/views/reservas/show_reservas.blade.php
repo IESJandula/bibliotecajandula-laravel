@@ -1,20 +1,25 @@
 @extends('master')
-
 @section('content')
-    <h1 class="text-center mt-4">Listado de reservas</h1>
-    <div class="row mb-5">
-        @foreach($reservas as $reserva)
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">ID de usuario: {{ $reserva->id_usuario }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">ID Libro: {{ $reserva->id_libro }}</h6>
-                        <p class="card-text">Fecha de reserva: {{ $reserva->fecha_reserva }}</p>
-                        <p class="card-text">Estado: {{ $reserva->estado }}</p>
-                        <a href="{{ route('show_reserva', $reserva->id) }}" class="btn btn-outline-primary">Ver más</a>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-@endsection
+    <div class="card">
+        <h5 class="card-header">Mostrar reservas</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>ID Libro</th>
+                        <th>Fecha de Reservas</th>
+                        <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach($reservas as $reserva)
+                    <tr>
+                        <td>{{ $prestamo->id_usuario }}</td>
+                        <td>{{ $prestamo->id_libro }}</td>
+                        <td>{{ $prestamo->fecha_reserva }}</td>
+                        <td>{{ $prestamo->estado }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>

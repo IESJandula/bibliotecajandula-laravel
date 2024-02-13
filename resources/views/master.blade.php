@@ -56,7 +56,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="overflow: hidden;">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="{{ route('home') }}"  class="app-brand-link">
               <span class="app-brand-logo demo">
               <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs>
@@ -104,7 +104,6 @@
                 <li class="menu-item">
                   <a
                     href="enlazar con crear usuario" 
-                    target="_blank"
                     class="menu-link">
                     <div data-i18n="creaUsuario">Crear Usuario</div>
                   </a>
@@ -125,15 +124,29 @@
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a
-                    href="enlazar con crear usuario" 
-                    target="_blank"
+                    href="{{ route('createLibro') }}" 
                     class="menu-link">
                     <div data-i18n="creaUsuario">Crear Libro</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="index.html" class="menu-link">
-                    <div data-i18n="Analytics">Actualizar Libro</div>
+                  <a href="{{ route('show_libros') }}"  class="menu-link">
+                    <div data-i18n="Analytics">Mostrar Libros</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Prestamos -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Dashboards">Prestamos</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{{ route('show_prestamos') }}" class="menu-link">
+                    <div data-i18n="mostrarPrestamo">Mostrar Prestamos</div>
                   </a>
                 </li>
               </ul>
@@ -147,39 +160,28 @@
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a
-                    href="enlazar con crear usuario" 
-                    target="_blank"
+                    href="{{ route('show_multas') }}" 
                     class="menu-link">
-                    <div data-i18n="creaUsuario">Crear Multa</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="index.html" class="menu-link">
-                    <div data-i18n="Analytics">Actualizar Multa</div>
+                    <div data-i18n="mostrarMultas">Mostrar Multas</div>
                   </a>
                 </li>
               </ul>
             </li>
 
             <!-- Reservas -->
-<li class="menu-item">
-    <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-        <div data-i18n="Dashboards">Reservas</div>
-    </a>
-    <ul class="menu-sub">
-        <li class="menu-item">
-            <a href="enlazar con crear usuario" target="_blank" class="menu-link">
-                <div data-i18n="creaUsuario">Crear Reserva</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="index.html" class="menu-link">
-                <div data-i18n="Analytics">Actualizar Reserva</div>
-            </a>
-        </li>
-    </ul>
-</li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Dashboards">Reservas</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('show_reservas') }}" class="menu-link">
+                            <div data-i18n="mostrarReserva">Mostrar Reservas</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
       <!-- Log out -->
       <li class="menu-item d-flex justify-content-center align-items-center mt-3">

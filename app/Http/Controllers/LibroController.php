@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class LibroController extends Controller
 {
@@ -137,7 +139,6 @@ class LibroController extends Controller
         // Define reglas de validación
         $rules = [
             'titulo' => 'required|string',
-            'isbn' => 'required|string|unique:libros',
             'anyo_publicacion' => 'required|integer',
             'editorial' => 'required|string',
             'genero' => 'required|string',
@@ -151,8 +152,6 @@ class LibroController extends Controller
         // Define mensajes personalizados de error
         $messages = [
             'titulo.required' => 'Por favor, introduce un título.',
-            'isbn.required' => 'El ISBN es obligatorio.',
-            'isbn.unique' => 'El ISBN ya existe.',
             'anyo_publicacion.required' => 'Por favor, introduce el año de publicación.',
             'editorial.required' => 'La editorial es obligatoria.',
             'genero.required' => 'El género es obligatorio.',
@@ -186,15 +185,13 @@ class LibroController extends Controller
             $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
         }
 
-        // Verifica si la nueva cant_total es menor a la cant_total vieja
-        if ($request->input('cant_total') < $libro->cant_total) {
-            // Calcula la nueva cant_disponible
-            $nuevaCantDisponible = $request->input('cant_total');
-
-            // Actualiza el libro con la nueva cant_total y cant_disponible
+        
+        if ($request->input('cant_total') > $libro->cant_total) {
+            $diferencia = $request->input('cant_total') - $libro->cant_total;
+            $nuevaCantDisponible = $diferencia + $libro->cant_disponible;
+            
             $libro->update([
                 'titulo' => $request->input('titulo'),
-                'isbn' => $request->input('isbn'),
                 'anyo_publicacion' => $request->input('anyo_publicacion'),
                 'poster' => $imageName,
                 'editorial' => $request->input('editorial'),
@@ -204,27 +201,13 @@ class LibroController extends Controller
                 'cant_disponible' => $nuevaCantDisponible,
                 'estanteria' => $request->input('estanteria'),
             ]);
-        } else {
-            $nuevaCantDisponible = $request->input('cant_total') - $libro->cant_disponible;
 
-            // Actualiza el libro con la nueva cant_total y cant_disponible
-            $libro->update([
-                'titulo' => $request->input('titulo'),
-                'isbn' => $request->input('isbn'),
-                'anyo_publicacion' => $request->input('anyo_publicacion'),
-                'poster' => $imageName,
-                'editorial' => $request->input('editorial'),
-                'genero' => $request->input('genero'),
-                'num_paginas' => $request->input('num_paginas'),
-                'cant_total' => $request->input('cant_total'),
-                'cant_disponible' => $nuevaCantDisponible,
-                'estanteria' => $request->input('estanteria'),
-            ]);
-        }
-
-        // Redirige a la página de detalles de la película actualizada
-        return redirect()->route('show_libro', ['id' => $libro->id])
+            // Redirige a la página de detalles de la película actualizada
+            return redirect()->route('show_libro', ['id' => $libro->id])
             ->with('success', 'Libro actualizado exitosamente.');
+        } else {
+            return redirect()->back()->withErrors(['cant_total' => 'La nueva cantidad total debe ser mayor que la cantidad total actual.']);
+        }
     }
 
     /**

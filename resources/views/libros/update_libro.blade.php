@@ -22,14 +22,6 @@
                   @endif
                 </div>
                 <div class="mb-3">
-                  <label class="form-label" for="isbn">ISBN</label>
-                  <input type="text" class="form-control" name="isbn" id="isbn" placeholder="ISBN" value="{{ old('isbn', $libro->isbn) }}" />
-                  {{-- Mostrar mensajes de error para el campo 'isbn' --}}
-                  @if($errors->has('isbn'))
-                    <span class="text-danger">{{ $errors->first('isbn') }}</span>
-                  @endif
-                </div>
-                <div class="mb-3">
                   <label class="form-label" for="anyo_publicacion">Año publicacion</label>
                   <input type="number" class="form-control" name="anyo_publicacion" id="anyo_publicacion" placeholder="Año publicacion" value="{{ old('anyo_publicacion', $libro->anyo_publicacion) }}" />
                   {{-- Mostrar mensajes de error para el campo 'anyo_publicacion' --}}
@@ -68,15 +60,7 @@
                   @if($errors->has('cant_total'))
                     <span class="text-danger">{{ $errors->first('cant_total') }}</span>
                   @endif
-                </div>
-                <div class="mb-3">
-                  <label class="form-label" for="cant_disponible">Cantidad disponible</label>
-                  <input type="number" class="form-control" name="cant_disponible" id="cant_disponible" placeholder="Cantidad disponible" value="{{ old('cant_disponible', $libro->cant_disponible) }}" />
-                  {{-- Mostrar mensajes de error para el campo 'cant_disponible' --}}
-                  @if($errors->has('cant_disponible'))
-                    <span class="text-danger">{{ $errors->first('cant_disponible') }}</span>
-                  @endif
-                </div>
+                </div>               
                 <div class="mb-3">
                   <label class="form-label" for="estanteria">Estanteria</label>
                   <input type="text" class="form-control" name="estanteria" id="estanteria" placeholder="Estanteria" value="{{ old('estanteria', $libro->estanteria) }}" />

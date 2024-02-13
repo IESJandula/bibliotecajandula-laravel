@@ -1,31 +1,31 @@
 @extends('master')
 
 @section('content')
-    <div class="row">
-        <div class="col-xl">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Lista de multas</h5>
-                    <small class="text-muted float-end">Lista de multas</small>
-                </div>
-                <div class="card-body">
-                    @if($multas->count() > 0)
-                        <ul class="list-group">
-                            @foreach($multas as $multa)
-                                <li class="list-group-item">
-                                    <strong>ID de usuario:</strong> {{ $multa->id_usuario }} <br>
-                                    <strong>Motivo:</strong> {{ $multa->motivo }} <br>
-                                    <strong>Cantidad:</strong> {{ $multa->cantidad }} <br>
-                                    <strong>Id de préstamo:</strong> {{ $multa->id_prestamo }} <br>
-                                    <strong>Estado:</strong> {{ $multa->estado }} <br>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <p>No hay multas disponibles.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
+<div class="card">
+    <h5 class="card-header">Mostrar multas</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id de usuario</th>
+                    <th>Motivo</th>
+                    <th>Cantidad</th>
+                    <th>Id de préstamo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach ($multas as $multa)
+                <tr>
+                    <td>{{ $multa->id_usuario }}</td>
+                    <td>{{ $multa->motivo }}</td>
+                    <td>{{ $multa->cantidad }}</td>
+                    <td>{{ $multa->id_prestamo }}</td>
+                    <td>{{ $multa->estado }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
+</div>
 @endsection

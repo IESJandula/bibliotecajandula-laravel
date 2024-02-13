@@ -12,7 +12,7 @@ class TransaccionController extends Controller
      */
     public function index()
     {
-        //
+        $transacciones = Transaccion::all();
     }
 
     /**

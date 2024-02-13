@@ -26,6 +26,7 @@
                 <button type="submit" class="btn btn-danger">Eliminar libro</button>
             </form>
         </div>
+</div>
     </div>
     </div>
 </div>

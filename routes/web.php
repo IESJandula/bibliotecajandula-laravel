@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MultaController;
+use App\Http\Controllers\PrestamoController;
+use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,9 +23,11 @@ use Illuminate\Support\Facades\Route;
 /* Home */
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 /* Login y logout */
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('createUser');
+
 
 
 /* libros */
@@ -36,21 +40,17 @@ Route::put('/libros/update/{id}', [LibroController::class, 'update'])->name('lib
 Route::delete('/libros/delete/{id}', [CatalogController::class, 'destroy'])->name('libro_delete');
 
 
-
-
-
-
 /* multas */
-Route::get('/multas/create', [MultaController::class, 'create'])->name('createMulta');
+Route::get('/multas/show', [MultaController::class, 'index'])->name('show_multas');
 
 /* prestamos */
-
+Route::get('/prestamos/show', [PrestamoController::class, 'index'])->name('show_prestamos');
 
 /* reservas */
-Route::get('/reservas/create', [ReservaController::class, 'create'])->name('createReserva');
+Route::get('/reservas/show', [ReservaController::class, 'index'])->name('show_reservas');
 
 /* transacciones */
-
+Route::get('/transacciones/show', [TransacciónController::class, 'index'])->name('show_transacciones');
 
 /* users */
 
