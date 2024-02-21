@@ -6,8 +6,10 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MultaController;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\TransaccionController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +28,9 @@ Route::get('/', function () {
 })->name('home');
 
 /* Login y logout */
-Route::get('/register', [RegisteredUserController::class, 'create'])->name('createUser');
-
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('create_user');
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
 
 /* libros */
@@ -45,6 +48,10 @@ Route::get('/multas/show', [MultaController::class, 'index'])->name('show_multas
 
 /* prestamos */
 Route::get('/prestamos/show', [PrestamoController::class, 'index'])->name('show_prestamos');
+Route::get('/prestamos/show/{id}', [PrestamoController::class, 'show'])->name('show_prestamo');
+Route::post('/prestamos/create/{id}/{user_id}', [PrestamoController::class, 'store'])->name('create_prestamo');
+Route::get('/prestamos/edit/{id}', [PrestamoController::class, 'edit'])->name('prestamo_edit');
+Route::put('/prestamos/update/{id}', [PrestamoController::class, 'update'])->name('prestamo_update');
 
 /* reservas */
 Route::get('/reservas/show', [ReservaController::class, 'index'])->name('show_reservas');

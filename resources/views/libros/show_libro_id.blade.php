@@ -25,6 +25,13 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Eliminar libro</button>
             </form>
+            
+        </div>
+        <div class="d-inline-block">
+            <form action="{{ route('create_prestamo', ['id' => $libro['id'], 'user_id' => Auth::id()]) }}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-primary">Generar prestamo</button>
+            </form>
         </div>
 </div>
     </div>

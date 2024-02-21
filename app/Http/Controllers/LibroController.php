@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
 
-class LibroController extends Controller
+class LibroController extends Controller         
 {
      /**
      * Display a listing of the resource.

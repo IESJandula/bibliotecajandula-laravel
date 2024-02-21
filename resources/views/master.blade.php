@@ -183,13 +183,13 @@
                 </ul>
             </li>
 
-      <!-- Log out -->
+      {{-- <!-- Log out -->
       <li class="menu-item d-flex justify-content-center align-items-center mt-3">
         <form action="{{ route('logout') }}" method="POST">
           @csrf
           <button type="submit" class="btn btn-danger">Log out</button>
         </form>
-      </li>
+      </li> --}}
 
         </aside>
         <!-- / Menu -->
@@ -197,12 +197,25 @@
         <!-- Layout container -->
         <div class="layout-page">
           <div class="container">
+            @auth
+                <form action="{{ url('/logout') }}" method="POST" class="d-flex justify-content-end mt-3">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Log out</button>
+                </form>
+            @else
+                <div class="d-flex justify-content-end mt-3">
+                    <a href="{{ url('/register') }}" class="btn btn-secondary">Registrarse</a>
+                    <a href="{{ url('/login') }}" class="btn btn-secondary mx-2">Login</a>
+                </div>
+            @endauth
+
             @yield('content')
+
           </div>
-          
-          
+ 
             </div>
             <!-- / Content -->
+
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
