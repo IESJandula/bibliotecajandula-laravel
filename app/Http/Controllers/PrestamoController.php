@@ -85,26 +85,30 @@ class PrestamoController extends Controller
      * Update the specified resource in storage.
      */
    
-public function update(Request $request, Prestamo $prestamo)
+public function update($id)
 {
+    $prestamo = Prestamo::findOrFail($id);
+
     // Verificar si el préstamo está devuelto
-    if ($prestamo->estado === 'devuelto') {
+    if ($prestamo->estado === 'DEVUELTO') {
         return redirect()->back()->with('error', 'El préstamo ya ha sido devuelto anteriormente.');
     }
 
     // Cambiar el estado del préstamo a devuelto
-    $prestamo->estado = 'devuelto';
-    $prestamo->save();
+    $prestamo->update([
+        'estado' => 'DEVUELTO',
+        'devuelto' => true,
+    ]);
 
     // Buscar el libro devuelto por su ID
-    $libro = Libro::findOrFail($prestamo->libro_id);
+    $libro = Libro::findOrFail($prestamo->id_libro);
 
     // Sumar una copia disponible al libro devuelto
-    $libro->copias_disponibles += 1;
+    $libro->cant_disponible += 1;
     $libro->save();
 
     // Redireccionar a la vista del préstamo con un mensaje de éxito
-    return redirect()->route('show_prestamos', ['id' => $prestamo->id])
+    return redirect()->route('show_prestamos')
         ->with('success', 'Préstamo devuelto exitosamente.');
 }
 

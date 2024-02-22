@@ -102,13 +102,6 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a
-                    href="enlazar con crear usuario" 
-                    class="menu-link">
-                    <div data-i18n="creaUsuario">Crear Usuario</div>
-                  </a>
-                </li>
-                <li class="menu-item">
                   <a href="index.html" class="menu-link">
                     <div data-i18n="Analytics">Actualizar Usuario</div>
                   </a>

@@ -1,9 +1,9 @@
 @extends('master')
 @section('content')
-    <div class="card">
+    <div class="card mt-3">
         <h5 class="card-header">Mostrar préstamos</h5>
         <div class="table-responsive text-nowrap">
-            <table class="table">
+            <table class="table text-center">
                 <thead>
                     <tr>
                         <th>ID Usuario</th>
@@ -11,6 +11,7 @@
                         <th>Fecha de Préstamo</th>
                         <th>Estado</th>
                         <th>Devuelto</th>
+                        <th>Acciones</th> 
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -21,6 +22,10 @@
                         <td>{{ $prestamo->fecha_prestamo }}</td>
                         <td>{{ $prestamo->estado }}</td>
                         <td>{{ $prestamo->devuelto ? 'Sí' : 'No' }}</td>
+                        <td>
+                            <a href="{{ route('show_prestamo', ['id' => $prestamo->id]) }}" class="btn btn-primary">Ver préstamo</a>
+                            <a href="{{ route('create_multa', ['id_prestamo' => $prestamo->id, 'id_usuario' => $prestamo->id_usuario]) }}" class="btn btn-danger">Añadir multa</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

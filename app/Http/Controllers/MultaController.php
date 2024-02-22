@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Multa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MultaController extends Controller
 {
@@ -22,7 +23,7 @@ class MultaController extends Controller
      */
     public function create()
     {
-        
+        return view('multas.create_multa');
     }
 
     /**
@@ -30,15 +31,51 @@ class MultaController extends Controller
      */
     public function store(Request $request)
     {
-        /*$request->validate([
+        $rules = [
             'motivo' => 'required|string',
             'cantidad' => 'required|numeric',
-            'estado' => 'required',
-            'id_prestamo' => 'required|numeric'
-        ]);*/
+            'id_prestamo' => 'required|numeric',
+            'id_usuario' => 'required|numeric',
+        ];
 
-        //Multa::create($request->all());
-        //return redirect()->route();
+        // Define mensajes personalizados de error
+        $messages = [
+            'motivo.required' => 'El campo motivo es obligatorio.',
+            'motivo.string' => 'El campo motivo debe ser una cadena de texto.',
+            
+            'cantidad.required' => 'El campo cantidad es obligatorio.',
+            'cantidad.numeric' => 'El campo cantidad debe ser un valor numérico.',
+            
+            'id_prestamo.required' => 'El campo ID de préstamo es obligatorio.',
+            'id_prestamo.numeric' => 'El campo ID de préstamo debe ser un valor numérico.',
+            
+            'id_usuario.required' => 'El campo ID de usuario es obligatorio.',
+            'id_usuario.numeric' => 'El campo ID de usuario debe ser un valor numérico.',
+        ];
+
+        // Ejecuta la validación
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // Si la validación falla, redirecciona con errores de validación
+        if ($validator->fails()) {
+            return redirect('multas/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        // Crea una nueva película
+        $multa = new Multa([
+            'motivo' => $request->input('motivo'),
+            'cantidad' => $request->input('cantidad'),
+            'id_usuario' => $request->input('id_usuario'),
+            'id_prestamo' => $request->input('id_prestamo'),
+            'estado' => 'POR ABONAR'
+        ]);
+
+        $multa->save();
+
+        return redirect()->route('show_multas')
+            ->with('success', 'Multa creada exitosamente.');
     }
 
     /**

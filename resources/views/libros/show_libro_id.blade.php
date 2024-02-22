@@ -33,6 +33,13 @@
                 <button type="submit" class="btn btn-primary">Generar prestamo</button>
             </form>
         </div>
+        <div class="mt-2">
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
 </div>
     </div>
     </div>

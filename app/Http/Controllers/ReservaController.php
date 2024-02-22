@@ -76,7 +76,9 @@ class ReservaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $reserva = Reserva::findOrFail($id);
+        $libro = Libro::findOrFail($reserva->id_libro);
+        return view('reservas.show_reservas',['reserva' => $reserva, 'libro' => $libro]);
     }
 
     /**

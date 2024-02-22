@@ -40,18 +40,20 @@ Route::get('/libros/show/{id}', [LibroController::class, 'show'])->name('show_li
 Route::post('/libros/createPost', [LibroController::class, 'store'])->name('createLibroPost');
 Route::get('/libros/edit/{id}', [LibroController::class, 'edit'])->name('libro_edit');
 Route::put('/libros/update/{id}', [LibroController::class, 'update'])->name('libro_update');
-Route::delete('/libros/delete/{id}', [CatalogController::class, 'destroy'])->name('libro_delete');
+Route::delete('/libros/delete/{id}', [LibroController::class, 'destroy'])->name('libro_delete');
 
 
 /* multas */
 Route::get('/multas/show', [MultaController::class, 'index'])->name('show_multas');
+Route::get('/multas/create', [MultaController::class, 'create'])->name('create_multa');
+Route::post('/multas/createPost', [MultaController::class, 'store'])->name('create_multa_post');
 
 /* prestamos */
 Route::get('/prestamos/show', [PrestamoController::class, 'index'])->name('show_prestamos');
 Route::get('/prestamos/show/{id}', [PrestamoController::class, 'show'])->name('show_prestamo');
 Route::post('/prestamos/create/{id}/{user_id}', [PrestamoController::class, 'store'])->name('create_prestamo');
-Route::get('/prestamos/edit/{id}', [PrestamoController::class, 'edit'])->name('prestamo_edit');
-Route::put('/prestamos/update/{id}', [PrestamoController::class, 'update'])->name('prestamo_update');
+/* Route::get('/prestamos/edit/{id}', [PrestamoController::class, 'update'])->name('prestamo_edit');
+ */Route::put('/prestamos/update/{id}', [PrestamoController::class, 'update'])->name('prestamo_update');
 
 /* reservas */
 Route::get('/reservas/show', [ReservaController::class, 'index'])->name('show_reservas');

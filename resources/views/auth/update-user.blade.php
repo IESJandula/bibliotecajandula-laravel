@@ -1,8 +1,5 @@
 <x-guest-layout>
-
-    <img src="{{ asset('storage/images/jandula.webp') }}" alt="imagen_jandula">
-
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('update') }}">
         @csrf
 
         <!-- Name -->

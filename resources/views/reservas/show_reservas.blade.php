@@ -10,7 +10,7 @@
                         <th>ID Libro</th>
                         <th>Fecha de Reservas</th>
                         <th>Estado</th>
-                  </tr>
+                    </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @foreach($reservas as $reserva)
@@ -23,3 +23,6 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+@endsection

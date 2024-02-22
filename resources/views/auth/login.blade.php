@@ -2,6 +2,8 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <img src="{{ asset('storage/images/jandula.webp') }}" alt="imagen_jandula">
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 

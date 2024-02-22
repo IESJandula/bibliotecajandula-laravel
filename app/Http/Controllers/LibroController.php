@@ -6,13 +6,14 @@ use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
 
 
 class LibroController extends Controller         
 {
-     /**
-     * Display a listing of the resource.
-     */
+    /**
+    * Display a listing of the resource.
+    */
     public function index()
     {
         // Obtén todas las películas desde la base de datos
@@ -215,17 +216,23 @@ class LibroController extends Controller
      */
     public function destroy($id)
     {
-        $libro = Libro::findOrFail($id);
-
-        // Borra la imagen asociada si existe
-        if ($libro->poster) {
-            Storage::delete('public/images/' . $libro->poster);
+        try {
+            $libro = Libro::findOrFail($id);
+    
+            // Borra la imagen asociada si existe
+            if ($libro->poster) {
+                Storage::delete('public/images/' . $libro->poster);
+            }
+    
+            // Elimina el libro de la base de datos
+            $libro->delete();
+    
+            // Redirige a la página principal del catálogo con un mensaje de éxito
+            return redirect()->route('show_libros')->with('success', 'Libro eliminado exitosamente.');
+        } catch (QueryException $e) {
+            return back()->with('error', 'Error al eliminar el libro, contiene préstamos asociados');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return back()->with('error', 'No se pudo encontrar el libro.');
         }
-
-        // Elimina la película de la base de datos
-        $libro->delete();
-
-        // Redirige a la página principal del catálogo con un mensaje de éxito
-        return redirect()->route('show_libros')->with('success', 'Libro eliminado exitosamente.');
     }
 }
