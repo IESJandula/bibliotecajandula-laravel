@@ -31,6 +31,8 @@ Route::get('/', function () {
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('create_user');
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::get('/update', [ProfileController::class, 'edit'])->name('update');
+Route::put('/update/{id}', [ProfileController::class, 'update'])->name('update_user');
 
 
 /* libros */
@@ -45,8 +47,9 @@ Route::delete('/libros/delete/{id}', [LibroController::class, 'destroy'])->name(
 
 /* multas */
 Route::get('/multas/show', [MultaController::class, 'index'])->name('show_multas');
-Route::get('/multas/create', [MultaController::class, 'create'])->name('create_multa');
+Route::get('/multas/create/{id}', [MultaController::class, 'create'])->name('create_multa');
 Route::post('/multas/createPost', [MultaController::class, 'store'])->name('create_multa_post');
+Route::put('/multas/update/{id}', [MultaController::class, 'update'])->name('update_multa');
 
 /* prestamos */
 Route::get('/prestamos/show', [PrestamoController::class, 'index'])->name('show_prestamos');

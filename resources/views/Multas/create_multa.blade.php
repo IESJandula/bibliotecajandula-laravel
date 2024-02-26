@@ -28,8 +28,8 @@
                     <span class="text-danger">{{ $errors->first('cantidad') }}</span>
                   @endif
                 </div>
-                <input type="hidden" name="id_usuario" id="id_usuario" value="{{$id_usuario}}">
-                <input type="hidden" name="id_prestamo" id="id_prestamo" value="{{$id_prestamo}}">
+                <input type="hidden" name="id_usuario" id="id_usuario" value="{{$usuario->id}}">
+                <input type="hidden" name="id_prestamo" id="id_prestamo" value="{{$prestamo->id}}">
                 <button type="submit" class="btn btn-primary">Generar multa</button>
               </form>
             </div>

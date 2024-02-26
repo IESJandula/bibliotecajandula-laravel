@@ -18,7 +18,7 @@
                         <td>{{ $prestamo->id_usuario }}</td>
                         <td>{{ $prestamo->id_libro }}</td>
                         <td>{{ $prestamo->fecha_reserva }}</td>
-                        <td>{{ $prestamo->estado }}</td>
+                        <td>{{ $prestamo->estado ? 'Activa' : 'Cancelada' }}</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Multa;
+use App\Models\Prestamo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,9 +23,11 @@ class MultaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        return view('multas.create_multa');
+        $prestamo = Prestamo::findOrFail($id);
+        $usuario = User::findOrFail($prestamo->id_usuario);
+        return view('multas.create_multa', ['prestamo' => $prestamo, 'usuario' => $usuario]);
     }
 
     /**
@@ -97,9 +101,23 @@ class MultaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Multa $multa)
+    public function update($id)
     {
-        //
+        $multa = Multa::findOrFail($id);
+
+        // Verificar si el préstamo está devuelto
+        if ($multa->estado === 'PAGADO') {
+            return redirect()->back()->with('error', 'La multa ya ha sido pagada anteriormente.');
+        }
+
+        // Cambiar el estado del préstamo a devuelto
+        $multa->update([
+            'estado' => 'PAGADO'
+        ]);
+
+        // Redireccionar a la vista del préstamo con un mensaje de éxito
+        return redirect()->route('show_multas')
+        ->with('success', 'Multa pagada exitosamente.');
     }
 
     /**

@@ -1,6 +1,8 @@
 <x-guest-layout>
 
-    <img src="{{ asset('storage/images/jandula.webp') }}" alt="imagen_jandula">
+    <div class="d-flex justify-content-center"> 
+        <img src="{{ asset('storage/images/jandula.webp') }}" alt="imagen_jandula" class="img-fluid">
+    </div>
 
     <form method="POST" action="{{ route('register') }}">
         @csrf

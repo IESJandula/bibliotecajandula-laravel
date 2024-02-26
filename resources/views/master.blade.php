@@ -102,7 +102,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="index.html" class="menu-link">
+                  <a href="{{ route('update') }}" class="menu-link">
                     <div data-i18n="Analytics">Actualizar Usuario</div>
                   </a>
                 </li>

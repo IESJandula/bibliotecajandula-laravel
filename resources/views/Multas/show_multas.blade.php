@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<div class="card">
+<div class="card mt-3">
     <h5 class="card-header">Mostrar multas</h5>
     <div class="table-responsive text-nowrap">
         <table class="table">
@@ -12,6 +12,7 @@
                     <th>Cantidad</th>
                     <th>Id de préstamo</th>
                     <th>Estado</th>
+                    <th>Pagar</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -22,6 +23,13 @@
                     <td>{{ $multa->cantidad }}</td>
                     <td>{{ $multa->id_prestamo }}</td>
                     <td>{{ $multa->estado }}</td>
+                    <td>            
+                        <form action="{{ route('update_multa', ['id' => $multa['id']]) }}" method="post">
+                        @method('PUT')
+                        @csrf
+                        <button type="submit" class="btn btn-warning">Pagar Multa</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

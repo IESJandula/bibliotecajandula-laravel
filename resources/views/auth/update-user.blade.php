@@ -1,31 +1,31 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('update') }}">
+    <form method="POST" action="{{ route('update_user',['id' => $user['id']] ) }}">
         @csrf
-
+        @method('PUT')
         <!-- Name -->
         <div>
             <x-input-label for="nombre" :value="__('Nombre')" />
-            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required autofocus autocomplete="name" />
+            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre', $user->nombre)" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email', $user->email)" required autofocus autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Curso -->
         <div class="mt-4">
             <x-input-label for="curso" :value="__('Curso')" />
-            <x-text-input id="curso" class="block mt-1 w-full" type="text" name="curso" :value="old('curso')" required />
+            <x-text-input id="curso" class="block mt-1 w-full" type="text" name="curso" :value="old('curso', $user->curso)" required autofocus autocomplete="curso" />
             <x-input-error :messages="$errors->get('curso')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Contraseña')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -37,7 +37,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('Confirmar Contraseña')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
@@ -47,12 +47,9 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
 
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                {{ __('Actualizar') }}
             </x-primary-button>
         </div>
     </form>

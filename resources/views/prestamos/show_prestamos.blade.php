@@ -24,7 +24,7 @@
                         <td>{{ $prestamo->devuelto ? 'Sí' : 'No' }}</td>
                         <td>
                             <a href="{{ route('show_prestamo', ['id' => $prestamo->id]) }}" class="btn btn-primary">Ver préstamo</a>
-                            <a href="{{ route('create_multa', ['id_prestamo' => $prestamo->id, 'id_usuario' => $prestamo->id_usuario]) }}" class="btn btn-danger">Añadir multa</a>
+                            <a href="{{ route('create_multa', ['id' => $prestamo->id]) }}" class="btn btn-danger">Añadir multa</a>
                         </td>
                     </tr>
                     @endforeach
