@@ -1,4 +1,11 @@
+
+<div class="flex items-center justify-end bg-gray-100">
+    <x-primary-button class="ms-4 m-3">
+      <a href="{{ url('/') }}">{{ __('Volver') }}</a>  
+    </x-primary-button>
+</div>
 <x-guest-layout>
+    <h1 class="text-center mb-3">Actualizar información personal</h1>
     <form method="POST" action="{{ route('update_user',['id' => $user['id']] ) }}">
         @csrf
         @method('PUT')
@@ -53,4 +60,5 @@
             </x-primary-button>
         </div>
     </form>
+
 </x-guest-layout>

@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="card mt-3">
-    <h5 class="card-header">Mostrar multas</h5>
+    <h5 class="card-header text-center">Listado de multas</h5>
     <div class="table-responsive text-nowrap">
-        <table class="table">
+        <table class="table text-center">
             <thead>
                 <tr>
                     <th>Id de usuario</th>
@@ -23,12 +23,14 @@
                     <td>{{ $multa->cantidad }}</td>
                     <td>{{ $multa->id_prestamo }}</td>
                     <td>{{ $multa->estado }}</td>
-                    <td>            
-                        <form action="{{ route('update_multa', ['id' => $multa['id']]) }}" method="post">
-                        @method('PUT')
-                        @csrf
-                        <button type="submit" class="btn btn-warning">Pagar Multa</button>
-                        </form>
+                    <td>
+                        @if($multa->estado !== 'PAGADO')
+                            <form action="{{ route('update_multa', ['id' => $multa['id']]) }}" method="post">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-warning">Pagar Multa</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

@@ -1,7 +1,11 @@
+<div class="flex items-center justify-end bg-gray-100">
+    <x-primary-button class="ms-4 m-3">
+      <a href="{{ url('/') }}">{{ __('Volver') }}</a>  
+    </x-primary-button>
+</div>
 <x-guest-layout>
-
-    <div class="d-flex justify-content-center"> 
-        <img src="{{ asset('storage/images/jandula.webp') }}" alt="imagen_jandula" class="img-fluid">
+    <div class="d-flex justify-content-center text-center"> 
+        <img src="{{ asset('storage/images/jandula.webp') }}" alt="imagen_jandula" class="img-fluid w-60 mx-auto">
     </div>
 
     <form method="POST" action="{{ route('register') }}">

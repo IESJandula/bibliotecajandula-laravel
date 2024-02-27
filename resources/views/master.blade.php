@@ -103,7 +103,7 @@
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="{{ route('update') }}" class="menu-link">
-                    <div data-i18n="Analytics">Actualizar Usuario</div>
+                    <div data-i18n="Analytics">Actualizar información</div>
                   </a>
                 </li>
               </ul>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reserva;
+use App\Models\Libro;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class ReservaController extends Controller
 {
@@ -28,47 +31,31 @@ class ReservaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($id, $id_user)
     {
-        /*$rules = [
-            'id_usuario' => 'required|exists:id_usuario',
-            'id_libro' => 'required|exists:id_libro',
-            'estado' => 'required|in:activa,cancelada',
-            'fecha_reserva' => 'required|date',
-        ];
+        $libro = Libro::findOrFail($id);
+        
+        // Verificar si hay copias disponibles del libro
+        if ($libro->cant_disponible <= 0) {
+            return redirect()->back()->with('error', 'No hay copias disponibles de este libro para prestar.');
+        }
 
-        $messages = [
-            'id_usuario.required' => 'El ID del usuario es obligatorio',
-            'id_usuario.exists' => 'El ID del usuario no existe en la tabla',
-            'id_libro.required' => 'El ID del libro es obligatorio',
-            'id_libro.exists' => 'El ID del libro no existe en la tabla',
-            'estado.required' => 'El estado es obligatorio',
-            'estado.exists' => 'El estado no existe en la tabla',
-            'fecha_reserva.required' => 'La fecha de reserva es obligatoria',
-            'fecha_reserva.exists' => 'La fecha de reserva no existe en la tabla',
-        ];
-
-        // Validar los datos del formulario
-        $validator = Validator::make($request->all(), $rules, $messages);
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }*/
-
-        $request->validate([
-            'id_usuario' => 'required|exists:id_usuario',
-            'id_libro' => 'required|exists:id_libro',
-            'estado' => 'required|in:activa,cancelada',
-            'fecha_reserva' => 'required|date',
-        ]);
-
+        // Crear un nuevo préstamo en la base de datos
         $reserva = new Reserva();
-        $reserva->id_usuario = $request->id_usuario;
-        $reserva->id_libro = $request->id_libro;
-        $reserva->fecha_reserva = now();
-        $reserva->estado = 'activa';
+        $reserva->id_libro = $id;
+        $reserva->id_usuario = $id_user;
+        $reserva->fecha_reserva = Carbon::now();
+        $reserva->estado = "ACTIVA";
         $reserva->save();
 
+        // Restar una copia disponible del libro
+        $libro->cant_disponible -= 1;
+        $libro->save();
+
+    
+        // Redireccionar a la vista de los préstamos
+        return redirect()->route('show_reservas')
+        ->with('success', 'Reserva creada exitosamente.');
     }
 
     /**
@@ -92,16 +79,28 @@ class ReservaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update($id)
     {
-        $request->validate([
-            'estado' => 'required|in:activa,cancelada'
-        ]);
-
         $reserva = Reserva::findOrFail($id);
 
-        $reserva->estado = $request->estado;
-        $reserva->save();
+        if ($reserva->estado === 'CANCELADO') {
+            return redirect()->back()->with('error', 'La reserva ya ha sido cancelada anteriormente.');
+        }
+
+        // Cambiar el estado del préstamo a devuelto
+        $reserva->update([
+            'estado' => 'CANCELADO',
+        ]);
+
+        // Buscar el libro devuelto por su ID
+        $libro = Libro::findOrFail($reserva->id_libro);
+
+        $libro->cant_disponible += 1;
+        $libro->save();
+
+        // Redireccionar a la vista del préstamo con un mensaje de éxito
+        return redirect()->route('show_reservas')
+        ->with('success', 'Reserva cancelada exitosamente.');
     }
 
     /**
