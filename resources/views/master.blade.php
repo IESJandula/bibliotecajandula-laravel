@@ -208,12 +208,12 @@
             @auth
                 <form action="{{ url('/logout') }}" method="POST" class="d-flex justify-content-end mt-3">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Log out</button>
+                    <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
                 </form>
             @else
                 <div class="d-flex justify-content-end mt-3">
                     <a href="{{ url('/register') }}" class="btn btn-secondary">Registrarse</a>
-                    <a href="{{ url('/login') }}" class="btn btn-secondary mx-2">Login</a>
+                    <a href="{{ url('/login') }}" class="btn btn-secondary mx-2">Iniciar Sesión</a>
                 </div>
             @endauth
 

@@ -65,4 +65,5 @@ Route::put('/reservas/update/{id}', [ReservaController::class, 'update'])->name(
 
 /* transacciones */
 Route::get('/transacciones/show', [TransaccionController::class, 'index'])->name('show_transacciones')->middleware('auth');
+
 require __DIR__.'/auth.php';

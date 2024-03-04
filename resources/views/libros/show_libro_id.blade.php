@@ -19,16 +19,19 @@
                         <p class="card-text"><b>Cantidad total:</b> {{ $libro['cant_total'] }}</p>
                         <p class="card-text"><b>Cantidad disponible:</b> {{ $libro['cant_disponible'] }}</p>
                         <p class="card-text"><b>Estantería:</b> {{ $libro['estanteria'] }}</p>
-                        <a href="{{ route('libro_edit', ['id' => $libro['id']]) }}" class="btn btn-warning mb-2">Editar libro</a>
-                        <form action="{{ route('libro_delete', ['id' => $libro['id']]) }}" method="post" class="d-inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger mb-2">Eliminar libro</button>
-                        </form>
-                        <form action="{{ route('create_reserva', ['id' => $libro['id'], 'user_id' => Auth::id()]) }}" method="post" class="d-inline-block">
-                            @csrf
-                            <button type="submit" class="btn btn-primary mb-2">Generar Reserva</button>
-                        </form>
+
+                        @auth
+                            <a href="{{ route('libro_edit', ['id' => $libro['id']]) }}" class="btn btn-warning mb-2">Editar libro</a>
+                            <form action="{{ route('libro_delete', ['id' => $libro['id']]) }}" method="post" class="d-inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger mb-2">Eliminar libro</button>
+                            </form>
+                            <form action="{{ route('create_reserva', ['id' => $libro['id'], 'user_id' => Auth::id()]) }}" method="post" class="d-inline-block">
+                                @csrf
+                                <button type="submit" class="btn btn-primary mb-2">Generar Reserva</button>
+                            </form>
+                        @endauth
                         @if(session('error'))
                             <div class="mt-2 alert alert-danger">
                                 {{ session('error') }}
