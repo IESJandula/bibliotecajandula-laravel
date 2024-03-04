@@ -6,6 +6,7 @@
             <table class="table text-center">
                 <thead>
                     <tr>
+                        <th>ID Reserva</th>
                         <th>ID Usuario</th>
                         <th>ID Libro</th>
                         <th>Fecha de Reserva</th>
@@ -16,6 +17,7 @@
                 <tbody class="table-border-bottom-0">
                     @foreach($reservas as $reserva)
                     <tr>
+                        <td>{{ $reserva->id }}</td>
                         <td>{{ $reserva->id_usuario }}</td>
                         <td>{{ $reserva->id_libro }}</td>
                         <td>{{ $reserva->fecha_reserva }}</td>
@@ -26,6 +28,10 @@
                                 @csrf
                                 @method('PUT')
                                 <button type="submit" class="btn btn-primary mb-2">Cancelar reserva</button>
+                            </form>
+                            <form action="{{ route('create_prestamo', ['id' => $reserva->id_libro, 'user_id' => Auth::id(), 'id_reserva' => $reserva->id ])}}" method="post" class="d-inline-block">
+                                @csrf
+                                <button type="submit" class="btn btn-primary mb-2">Generar préstamo</button>
                             </form>
                             @endif
                         </td>

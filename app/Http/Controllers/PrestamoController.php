@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Prestamo;
 use Illuminate\Http\Request;
 use App\Models\Libro;
+use App\Models\Transaccion;
+use App\Models\Reserva;
 use Carbon\Carbon;
 
 class PrestamoController extends Controller
@@ -31,7 +33,7 @@ class PrestamoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-     public function store($id, $user_id)
+     public function store($id, $user_id, $id_reserva)
      {
         info('llega');
          // Buscar el libro por su ID
@@ -56,6 +58,19 @@ class PrestamoController extends Controller
         // Restar una copia disponible del libro
         $libro->cant_disponible -= 1;
         $libro->save();
+
+        //Nueva transaccion
+        $transaccion = new Transaccion();
+        $transaccion->id_usuario = $user_id;
+        $transaccion->id_prestamo = $prestamo->id;
+        $transaccion->tipo = "PRESTAMO";
+        $transaccion->fecha_transaccion = Carbon::now();
+        $transaccion->save();
+
+        $reserva = Reserva::findOrFail($id_reserva);
+        $reserva -> estado = 'CANCELADO';
+        $reserva->save();
+
      
          // Redireccionar a la vista de los préstamos
         return redirect()->route('show_prestamo', ['id' => $prestamo->id])

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reserva;
 use App\Models\Libro;
+use App\Models\Transaccion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -51,6 +52,14 @@ class ReservaController extends Controller
         // Restar una copia disponible del libro
         $libro->cant_disponible -= 1;
         $libro->save();
+
+        //Nueva transaccion
+        $transaccion = new Transaccion();
+        $transaccion->id_usuario = $id_user;
+        $transaccion->id_reserva = $reserva->id;
+        $transaccion->tipo = "RESERVA";
+        $transaccion->fecha_transaccion = Carbon::now();
+        $transaccion->save();
 
     
         // Redireccionar a la vista de los préstamos

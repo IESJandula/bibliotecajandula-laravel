@@ -5,7 +5,7 @@
     <div class="row mb-5 p-4">
         @foreach($libros as $libro)
             <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card h-100 p-3 shadow" style="max-width: 60%;">
+                <div class="card h-100 p-3 shadow" style="max-width: 60%; max-height: auto;">
                     <img class="card-img-top img-fluid" src="{{ asset('storage/images/' . $libro->poster) }}" alt="Card image cap" style="max-height: 15rem;">
                     <div class="mt-3">
                         <h5 class="card-title" style="font-size: 1.2rem;">{{ $libro->titulo }}</h5>

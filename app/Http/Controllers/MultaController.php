@@ -6,11 +6,13 @@ use App\Models\Prestamo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use App\Models\Transaccion;
 
 class MultaController extends Controller
 {
     
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -77,6 +79,14 @@ class MultaController extends Controller
         ]);
 
         $multa->save();
+
+        //Nueva transaccion
+        $transaccion = new Transaccion();
+        $transaccion->id_usuario = $request->input('id_usuario');
+        $transaccion->id_multa = $multa->id;
+        $transaccion->tipo = "MULTA";
+        $transaccion->fecha_transaccion = Carbon::now();
+        $transaccion->save();
 
         return redirect()->route('show_multas')
             ->with('success', 'Multa creada exitosamente.');

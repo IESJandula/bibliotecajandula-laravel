@@ -54,7 +54,7 @@ Route::put('/multas/update/{id}', [MultaController::class, 'update'])->name('upd
 /* prestamos */
 Route::get('/prestamos/show', [PrestamoController::class, 'index'])->name('show_prestamos')->middleware('auth');
 Route::get('/prestamos/show/{id}', [PrestamoController::class, 'show'])->name('show_prestamo')->middleware('auth');
-Route::post('/prestamos/create/{id}/{user_id}', [PrestamoController::class, 'store'])->name('create_prestamo')->middleware('auth');
+Route::post('/prestamos/create/{id}/{user_id}/{id_reserva}', [PrestamoController::class, 'store'])->name('create_prestamo')->middleware('auth');
 Route::put('/prestamos/update/{id}', [PrestamoController::class, 'update'])->name('prestamo_update')->middleware('auth');
 
 /* reservas */
@@ -62,4 +62,7 @@ Route::get('/reservas/show', [ReservaController::class, 'index'])->name('show_re
 Route::post('/reservas/create/{id}/{user_id}', [ReservaController::class, 'store'])->name('create_reserva')->middleware('auth');
 Route::put('/reservas/update/{id}', [ReservaController::class, 'update'])->name('reserva_update')->middleware('auth');
 
+
+/* transacciones */
+Route::get('/transacciones/show', [TransaccionController::class, 'index'])->name('show_transacciones')->middleware('auth');
 require __DIR__.'/auth.php';

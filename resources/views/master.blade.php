@@ -176,6 +176,21 @@
                 </ul>
             </li>
 
+            <!-- Transacciones -->
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Dashboards">Transacciones</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('show_transacciones') }}" class="menu-link">
+                            <div data-i18n="mostrarReserva">Mostrar Transacciones</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
       {{-- <!-- Log out -->
       <li class="menu-item d-flex justify-content-center align-items-center mt-3">
         <form action="{{ route('logout') }}" method="POST">
