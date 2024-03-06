@@ -56,8 +56,8 @@ class PrestamoController extends Controller
         $prestamo->save();
      
         // Restar una copia disponible del libro
-        $libro->cant_disponible -= 1;
-        $libro->save();
+        /* $libro->cant_disponible -= 1;
+        $libro->save(); */
 
         //Nueva transaccion
         $transaccion = new Transaccion();

@@ -35,7 +35,7 @@ class ProfileController extends Controller
             'nombre' => 'required|string',
             'curso' => 'required|numeric',
             'email' => 'required|string',
-            'password' => 'required|string|min:8', 
+            'password' => 'required|string|min:8',
             'password_confirmation' => 'required|string|same:password', 
         ];
         $messages = [
